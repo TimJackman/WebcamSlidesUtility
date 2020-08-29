@@ -1,0 +1,59 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="js/main.js"></script>
+
+  <meta name="theme-color" content="#fafafa">
+
+</head>
+
+<body style="background-color:#ecf0f1; font-family: Arial !important; overflow-x: hidden;">
+
+<header>
+  <div id = "header">
+    Webcam Slides Utility
+    <button id = "toggleWebcam"> Toggle Webcam </button>
+    <button id = "collapseURL"> Enable Fullscreen </button>
+  </div>
+</header>
+
+<hr>
+
+<div id = "menu">
+ Input URL Here:
+  <input type="text" id="url">
+  <button id = "submit"> Submit </button>
+</div>
+
+
+  <div id="container" style="display:none">
+    <video autoplay id="videoElement">
+    </video>
+  </div>
+<div id="slideshowContainer">
+  <iframe id="slideshow" src="" frameBorder="0";> </iframe>
+</div>
+
+</div>
+
+</body>
+</html>
