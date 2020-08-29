@@ -18,6 +18,7 @@ function loadURL() {
   } else if (url.includes("edit")) {
    let endPos = url.indexOf("edit")
     url = url.substring(0,endPos) + 'embed';
+  }
   console.log(url);
   slides.src = url;
 }
