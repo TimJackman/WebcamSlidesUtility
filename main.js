@@ -90,12 +90,13 @@ $( function() {
         }
     });
     $( "#container" ).resizable({
-        aspectRatio:  4 / 3
+        aspectRatio:  4 / 3,
+        ghost: true,
+        handles: 'ne, se, sw, nw',
+        iframeFix: true
     });
     $( "#container" ).draggable({
-        containment: "parent",
-        ghost: true,
-        handles: 'ne, se, sw, nw'
+        containment: "parent"
     });
 
     //$( "#slideshowContainer").resizable({
