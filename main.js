@@ -9,6 +9,9 @@ let viewportHeight = $( window ).height();
 let slideHeight;
 let slideWidth;
 let slideOffset;
+let hasWebcam = false;
+
+
 
 function loadURL() {
     let slides = document.getElementById('slideshow');
@@ -39,14 +42,14 @@ function toggleContainer(){
     $( "#container" ).toggle("clip",500);
 }
 
-function toggleWebcam(){
+async function toggleWebcam(){
     let video = document.getElementById("videoElement");
     if (!isWebcamVisible && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true})
+        await navigator.mediaDevices.getUserMedia({ video: true})
             .then(function (stream) {
                 video.srcObject = stream;
-
-                isWebcamVisible = !isWebcamVisible
+                hasWebcam = true;
+                isWebcamVisible = true;
 
             }).catch(function (err0r) {
                 alert("Your webcam is unavailable. Please make sure it is not in use by another program, such as Zoom.");
@@ -61,7 +64,8 @@ function toggleWebcam(){
             track.stop();
         }
         document.getElementById("videoElement").srcObject = null
-        isWebcamVisible = !isWebcamVisible;
+        hasWebcam = false;
+        isWebcamVisible = false;
     }
     let promiseDelay = 1500;
     return new Promise(resolve => {
@@ -143,6 +147,7 @@ document.addEventListener("keypress", function(e) {
         toggleFullScreen();
     }
 }, false);
+
 
 function toggleFullScreen() {
     if (!document.fullscreenElement) {
