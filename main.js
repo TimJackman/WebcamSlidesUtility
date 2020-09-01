@@ -92,11 +92,11 @@ $( function() {
     $( "#container" ).resizable({
         aspectRatio:  4 / 3,
         ghost: true,
-        handles: 'ne, se, sw, nw',
-        iframeFix: true
+        handles: 'ne, se, sw, nw'
     });
     $( "#container" ).draggable({
-        containment: "parent"
+        containment: "parent",
+        iframeFix: true
     });
 
     //$( "#slideshowContainer").resizable({
