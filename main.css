@@ -381,12 +381,12 @@ hr {
     /*padding-top: 30px;*/
     height: 100%;
     width: 100%;
-    background-color: black;
+    background-color: #ecf0f1;
     /*display:none;*/
 }
 
 #slideshow {
     height: 100%;
-    width: 99.7%;
+    width: 100%;
 
 }
