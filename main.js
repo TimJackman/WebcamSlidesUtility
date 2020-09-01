@@ -30,8 +30,9 @@ function loadURL() {
 function toggleContainer(){
     if (!hasToggledWebcam) {
         let container = document.getElementById('container');
-        container.style.left = viewportWidth * 0.01 + "px";
-        container.style.top = viewportHeight * 0.175 + "px";
+        let slideContainer = $( "#slideshowContainer").offset();
+        container.style.left = slideContainer.left;
+        container.style.top = slideContainer.top;
         container.style.zIndex = 100;
         hasToggledWebcam = !hasToggledWebcam;
     }
