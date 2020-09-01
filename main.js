@@ -91,7 +91,6 @@ $( function() {
     });
     $( "#container" ).resizable({
         aspectRatio:  4 / 3,
-        ghost: true,
         handles: 'ne, se, sw, nw'
     });
     $( "#container" ).draggable({
