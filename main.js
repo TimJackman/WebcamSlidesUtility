@@ -16,12 +16,12 @@ function loadURL() {
 
     if (url.includes("pub?start=")) {
         let endPos = url.indexOf("pub?start=")
-        url = url.substring(0, endPos) + 'embed?rm=minimal';
+        url = url.substring(0, endPos) + 'embed';
     } else if (url.includes("<iframe src=")) {
         url = url.slice(url.indexOf("\"" + 1), url.indexOf("?start" -1));
     } else if (url.includes("edit")) {
         let endPos = url.indexOf("edit")
-        url = url.substring(0,endPos) + 'embed?rm=minimal';
+        url = url.substring(0,endPos) + 'embed';
     }
 
     slides.src = url;
