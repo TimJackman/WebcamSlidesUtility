@@ -175,7 +175,13 @@ $( function() {
     let container = $( "#container" );
     container.resizable({
         aspectRatio:  4 / 3,
-        handles: 'ne, se, sw, nw'
+        handles: 'ne, se, sw, nw',
+        start: function(event, ui) {
+            $('iframe').css('pointer-events','none');
+        },
+        stop: function(event, ui) {
+            $('iframe').css('pointer-events','auto');
+        }
     });
     container.draggable({
         containment: "parent",
@@ -282,3 +288,29 @@ document.addEventListener('fullscreenchange', (event) => {
         }
     }
 })
+
+var _init = $.ui.dialog.prototype._init;
+$.ui.dialog.prototype._init = function () {
+    var self = this;
+    _init.apply(this, arguments);
+    this.uiDialog.bind('mousedown', function (event, ui) {
+        var o = $(this).data('resizable').options;
+        $(o.iframeFix === true ? "iframe" : o.iframeFix).each(function () {
+            $('<div class="ui-resizable-iframeFix" style="background: #fff;"></div>')
+                .css({
+                    width: this.offsetWidth + "px",
+                    height: this.offsetHeight + "px",
+                    position: "absolute",
+                    opacity: "0.001",
+                    zIndex: 1000
+                })
+                .css($(this).offset())
+                .appendTo("body");
+        });
+    });
+    this.uiDialog.bind('mouseup', function (event, ui) {
+        $("div.ui-resizable-iframeFix").each(function () {
+            this.parentNode.removeChild(this);
+        }); //Remove frame helpers
+    });
+};

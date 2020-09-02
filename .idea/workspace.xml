@@ -24,8 +24,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5d55531f-6ffe-426e-b088-41960df4a715" name="Default Changelist" comment="Added await for webcam permission">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +95,7 @@
       <updated>1598977434923</updated>
       <workItem from="1598977436331" duration="763000" />
       <workItem from="1598990382872" duration="5078000" />
-      <workItem from="1599066240703" duration="13449000" />
+      <workItem from="1599066240703" duration="14150000" />
     </task>
     <task id="LOCAL-00001" summary="Added Feedback form">
       <created>1598990548719</created>
