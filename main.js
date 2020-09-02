@@ -1,17 +1,85 @@
 let isWebcamVisible = false;
 let isToggling = false;
 let hasToggledWebcam = false;
-let hasToggledSlides = false;
 let fullscreenHeight = window.screen.height;
 let fullscreenWidth = window.screen.width;
-let viewportWidth = $( window ).width();
-let viewportHeight = $( window ).height();
 let slideHeight;
 let slideWidth;
 let slideOffset;
 let hasWebcam = false;
+let hasPermission = false;
+let webcamNames = [];
+let webcamIds = []
 
+async function getWebcamPermissions() {
+    let stream = null;
+    let hasDenied = false;
 
+    try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: true})
+        hasPermission = true;
+        await enumerateWebcams();
+        let tracks = stream.getTracks();
+
+        for (let i = 0; i < tracks.length; i++) {
+            let track = tracks[i];
+            track.stop();
+        }
+
+    } catch(err) {
+        if (err.name === "NotAllowedError") {
+            alert('This application requires Webcam access to work. Please refresh and give permission.');
+            hasDenied = true;
+        } else {
+            hasPermission = true;
+        }
+    }
+
+    if (!hasPermission && !hasDenied) {
+        alert('This application requires Webcam access to work. Please refresh and give permission.');
+    }
+}
+
+async function enumerateWebcams() {
+    await navigator.mediaDevices.enumerateDevices()
+        .then(function(devices) {
+            let webcamNameOccurences = {};
+            devices.forEach(function(device) {
+                if (device.kind === "videoinput") {
+                    console.log(device.label);
+                    if (device.label != "") {
+                        if (device.label in webcamNameOccurences) {
+                            let occurences = webcamNameOccurences[device.label]
+                            webcamNames.push(device.label + " #" + (occurences + 1));
+                            webcamNameOccurences[device.label] = occurences + 1;
+                        } else {
+                            webcamNames.push(device.label);
+                            webcamNameOccurences[device.label] = 1;
+                        }
+                    } else {
+                        webcamNames.push("Webcam #" + (webcamNames.length + 1));
+                    }
+
+                    webcamIds.push(device.deviceId);
+                }
+            });
+        })
+        .catch(function (err) {
+            console.log(err.name + ": " + err.message);
+        });
+
+    let select = document.getElementById("webcams");
+    webcamNames.forEach(function (webcam) {
+        console.log("adding Option!");
+        let option = document.createElement("option");
+        option.text = webcam;
+        select.add(option);
+    });
+
+    console.log("selecting: " + webcamNames[0]);
+    select.value = webcamNames[0];
+    $( "#webcams" ).selectmenu("refresh");
+}
 
 function loadURL() {
     let slides = document.getElementById('slideshow');
@@ -36,7 +104,7 @@ function toggleContainer(){
         let slideContainer = $( "#slideshowContainer").offset();
         container.style.left = slideContainer.left;
         container.style.top = slideContainer.top;
-        container.style.zIndex = 100;
+        container.style.zIndex = "100";
         hasToggledWebcam = !hasToggledWebcam;
     }
     $( "#container" ).toggle("clip",500);
@@ -45,14 +113,18 @@ function toggleContainer(){
 async function toggleWebcam(){
     let video = document.getElementById("videoElement");
     if (!isWebcamVisible && navigator.mediaDevices.getUserMedia) {
-        await navigator.mediaDevices.getUserMedia({ video: true})
+        let selectedWebcam = document.getElementById("webcams").value;
+        let selectedID = webcamIds[webcamNames.indexOf(selectedWebcam)];
+        await navigator.mediaDevices.getUserMedia({
+            video: {
+                deviceId: {exact: selectedID}}})
             .then(function (stream) {
                 video.srcObject = stream;
                 hasWebcam = true;
                 isWebcamVisible = true;
 
             }).catch(function (err0r) {
-                alert("Your webcam is unavailable. Please make sure it is not in use by another program, such as Zoom.");
+                alert("This webcam is unavailable. Please make sure it is not in use by another program, such as Zoom.");
         })
     } else if (isWebcamVisible) {
 
@@ -78,9 +150,15 @@ async function toggleWebcam(){
 
 $( function() {
     $("#toggleWebcam").on("click", async function () {
+        if (!hasPermission) {
+            alert('This application requires Webcam access to work. Please refresh and give permission.');
+            return;
+        }
+
         if (!isToggling) {
             isToggling = true;
-            $( "#spin").show();
+            let spin = $( "#spin" );
+            spin.show();
             if (isWebcamVisible) {
                 await toggleContainer();
                 setTimeout("toggleWebcam()",1500);
@@ -91,16 +169,22 @@ $( function() {
                 }
             }
             setTimeout(() => {isToggling = false;}, 1500);
-            $( "#spin" ).hide();
+            spin.hide();
         }
     });
-    $( "#container" ).resizable({
+    let container = $( "#container" );
+    container.resizable({
         aspectRatio:  4 / 3,
         handles: 'ne, se, sw, nw'
     });
-    $( "#container" ).draggable({
+    container.draggable({
         containment: "parent",
         iframeFix: true
+    });
+
+    let select = $( "#webcams" )
+    select.selectmenu({
+        width: 300
     });
 
     //$( "#slideshowContainer").resizable({
@@ -115,7 +199,7 @@ $( function() {
     })
 
     $( "#submit").on( "click", function() {
-        let container = document.getElementById('slideshowContainer');
+        /*let container = document.getElementById('slideshowContainer');*/
         /*let width = viewportWidth * 0.80;
         let height = width / 16 * 9;
         let maxHeight = viewportHeight * 0.75;
@@ -136,18 +220,6 @@ $("#url").keyup(function(event) {
         $("#submit").click();
     }
 });
-
-$(window).resize(function() {
-    var viewportWidth = $(window).width();
-    var viewportHeight = $(window).height();
-});
-
-document.addEventListener("keypress", function(e) {
-    if (e.code === "KeyF") {
-        toggleFullScreen();
-    }
-}, false);
-
 
 function toggleFullScreen() {
     if (!document.fullscreenElement) {

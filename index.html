@@ -20,8 +20,8 @@
     <meta property="og:type" content="">
     <meta property="og:url" content="">
     <meta property="og:image" content="">
-    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -33,16 +33,24 @@
 
 <body style="background-color:#ecf0f1; font-family: Arial !important; overflow-x: hidden;">
 
-<div class="flex-container" style="display:flex; flex-direction: column; width: 100%; height: 100%">
-<header>
-    <div id = "header">
-        Webcam Slides Utility
-        <button id = "toggleWebcam"> <i class="fa fa-circle-o-notch fa-spin" id="spin" style="display: none"></i>Toggle Webcam </button>
+<div id = "mainContainer" class="flex-container" style="display:flex; flex-direction: column; width: 100%; height: 100%">
+<div id = "menuContainer" class="flex-container" style="display: flex; flex-direction: row; align-items:center">
+        <div id = "title">
+            Webcam Slides Utility
+        </div>
+
+        <button id = "toggleWebcam"> <i class="fa fa-circle-o-notch fa-spin" id="spin" style="display: none; margin-right: 0.5%"></i>Toggle Webcam </button>
+
+        <div id = "selectWebcamContainer" class="flex-container" style="display: flex; flex-direction: column; margin-left: 3%">
+            <label for="webcams" style="display: block; font-size: small"> Select webcam </label>
+            <select name = "webcams" id = "webcams"> </select>
+        </div>
+
         <button id = "collapseURL"> Hide Menu </button>
+
         <button id = "fullscreen" onclick = "toggleFullScreen()"> Fullscreen </button>
-        <div id = "feedback" style = "font-size: x-small"> Got feedback? <a href="https://forms.gle/ewvX7PXwSH2Yt5rD6"> Click Here!</a> </small> </div>
-    </div>
-</header>
+</div>
+    <div id = "feedback" style = "font-size: x-small; background-color:#87364e; color: white"> Got feedback? <a href="https://forms.gle/ewvX7PXwSH2Yt5rD6"> Click Here!</a> </small> </div>
 
 <hr>
 
@@ -63,5 +71,21 @@
 </div>
 
 </div>
+<script>
+    getWebcamPermissions();
+    function enumerate() {
+            navigator.mediaDevices.enumerateDevices()
+                .then(function (devices) {
+                    devices.forEach(function (device) {
+                        if (device.kind === "videoinput") {
+                            console.log(device.label);
+                            console.log(device.deviceId);
+                        }
+                    })
+                })
+        };
+</script>
+
+<button onclick="enumerate()">Test button</button>
 </body>
 </html>

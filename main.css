@@ -277,6 +277,7 @@ body {
     border: 10px #333 solid;
     border-top-width: 30px;
     position: absolute;
+
 }
 
 #videoElement {
@@ -294,32 +295,31 @@ body {
 #url {
     width: 60%;
     height: 100%;
-    margin-left: 20px;
-    margin-right: -10px;
     padding-left: 10px;
-    border-radius: 20px 0px 0px 20px;
+    border-radius: 20px 20px 20px 20px;
     background-color:#ecf0f1;
     border: none;
 }
 
 #submit{
-    border-radius: 0px 20px 20px 0px;
-    font-size: medium;
+    border-radius: 20px 20px 20px 20px;
+    font-size: large;
     height: 105%;
     width: 5%;
     min-width: 100px;
-    padding-top: -5px;
     border-top: none;
     border-right: none;
+    border-left: none;
     border-bottom: none;
 }
 
-header {
+#menuContainer {
     background-color: #87364e;
     color: white;
+
 }
 
-#header {
+#title {
     font-size: xx-large;
     position: relative;
     padding: 1%
@@ -327,12 +327,12 @@ header {
 
 #toggleWebcam {
     font-size: medium;
-    height: 80%;
-    width: 5%;
-    min-width: 150px;
+    height: 40px;
+    width: 150px;
     border-radius: 20px;
     padding-top: 5px;
     padding-bottom: 5px;
+    margin-top: 15px;
     position: relative;
     top: -5px;
     left: 2%;
@@ -341,31 +341,35 @@ header {
 
 #collapseURL {
     font-size: medium;
-    height: 80%;
-    width: 5%;
-    min-width: 150px;
+    height: 40px;
+    width: 150px;
     border-radius: 20px;
     padding-top: 5px;
     padding-bottom: 5px;
+    margin-top: 15px;
     position: relative;
     top: -5px;
-    left: 3%;
+    left: 1%;
     border: none;
 }
 
 #fullscreen {
     font-size: medium;
-    height: 80%;
-    width: 5%;
-    min-width: 150px;
+    height: 40px;
+    width: 150px;
     border-radius: 20px;
     padding-top: 5px;
     padding-bottom: 5px;
+    margin-top: 15px;
     position: relative;
     top: -5px;
-    left: 4%;
+    left: 2%;
     border: none;
 
+}
+
+#feedback {
+    padding-left: 20px;
 }
 
 hr {
@@ -390,3 +394,10 @@ hr {
     width: 100%;
 
 }
+
+.ui-widget {
+    font-family: Trebuchet MS, Tahoma, Verdana,
+Arial, sans-serif;
+    font-size: 11px;
+    }
+
