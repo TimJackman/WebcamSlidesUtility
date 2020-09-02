@@ -229,10 +229,10 @@ $("#url").keyup(function(event) {
 
 function toggleFullScreen() {
     if (!document.fullscreenElement) {
-        let slide = document.getElementById("slideshowContainer");
-        slideHeight = slide.offsetHeight;
-        slideWidth = slide.offsetWidth;
-        slideOffset = $( "#slideshowContainer").offset();
+        slideOffset = $( "#big-container").offset();
+        slideHeight = document.getElementById("big-container").offsetHeight
+        slideWidth = document.getElementById("big-container").offsetWidth;
+        console.log("toggled offset top" + slideOffset.top);
         document.getElementById("big-container").requestFullscreen();
     } else {
         if (document.exitFullscreen) {
@@ -259,58 +259,50 @@ document.addEventListener('fullscreenchange', (event) => {
     let videoOffset;
 
     if (!document.fullscreenElement && isWebcamVisible) {
-        videoOffset = $( "#container").offset();
-        let slideOffset = $( "#slideshowContainer").offset();
 
-        video.style.top = ((videoOffset.top / fullscreenHeight) * slide.offsetHeight + slideOffset.top - 1) + "px";
-        video.style.left = ((videoOffset.left / fullscreenWidth) * slideWidth + slideOffset.left) + "px";
+        console.log("Exiting");
 
-        if(video.offsetLeft + video.offsetWidth > fullscreenWidth) {
-            video.style.left = fullscreenWidth - video.offsetWidth + "px";
+        if (video.offsetHeight > slide.offsetHeight || video.offsetWidth > slide.offsetWidth) {
+            if (slide.offsetHeight > 3 / 4 * slide.offsetWidth) {
+                console.log("#1");
+                video.style.height = 3 / 4 * slide.offsetWidth + "px";
+                video.style.width = slide.offsetWidth + "px";
+            } else {
+                console.log("#2");
+                video.style.height = slide.offsetHeight + "px";
+                video.style.width = 4 / 3 * slide.offsetHeight + "px";
+            }
         }
+
+        if (video.offsetTop < slideOffset.top) {
+            console.log("#3:" + video.offsetTop + " " + slideOffset.top);
+            video.style.top = slideOffset.top + "px";
+            console.log(video.style.top);
+        } else if (video.offsetTop + video.offsetHeight > (slideOffset.top + slide.offsetHeight)) {
+            console.log("#4");
+            video.style.top = slideOffset.top + slide.offsetHeight - video.offsetHeight + "px";
+        }
+
+        if (video.offsetLeft < slideOffset.left) {
+            console.log("#5:" + video.offsetLeft + " " + slideOffset.left);
+            video.style.left = slideOffset.left + "px";
+            console.log(video.style.left);
+        } else if (video.offsetLeft + video.offsetWidth > (slideOffset.left + slide.offsetWidth)) {
+            console.log("#6");
+            video.style.left = slideOffset.left + slide.offsetWidth - video.offsetWidth + "px";
+        }
+        
 
     } else if (document.fullscreenElement && isWebcamVisible) {
-        videoOffset = $( "#container").offset();
-        let videoTop = videoOffset.top;
-        let videoLeft = videoOffset.left;
-        video.style.top = ((videoTop / slideHeight) * fullscreenHeight - slideOffset.top - 56) + "px";
-        video.style.left = ((videoLeft / slideWidth) * fullscreenWidth - slideOffset.left) + "px";
-
-        let heightFactor = fullscreenHeight / slideHeight;
-
-        video.style.height = heightFactor * (video.offsetHeight) - 40 + "px";
-
-        let newWidth = (video.offsetHeight - 40) * 4 / 3;
-        video.style.width = newWidth + "px";
-
-        if(video.offsetLeft + video.offsetWidth > slideOffset.left + slideWidth) {
-            video.style.left = slideOffset.left + slideWidth - newWidth - 10 + "px";
-        }
+        /*
+        console.log("Entering");
+        console.log("slideOffsetTop" + slideOffset.top);
+        let video = document.getElementById("container");
+        let videoTop = video.offsetTop;
+        console.log("videoTop" + videoTop);
+        let videoLeft = video.offsetLeft;
+        video.style.top = (((videoTop - slideOffset.top) / slideHeight) * fullscreenHeight) + "px";
+        video.style.left = (((videoLeft - slideOffset.left) / slideWidth) * fullscreenWidth) + "px";
+        */
     }
 })
-
-var _init = $.ui.dialog.prototype._init;
-$.ui.dialog.prototype._init = function () {
-    var self = this;
-    _init.apply(this, arguments);
-    this.uiDialog.bind('mousedown', function (event, ui) {
-        var o = $(this).data('resizable').options;
-        $(o.iframeFix === true ? "iframe" : o.iframeFix).each(function () {
-            $('<div class="ui-resizable-iframeFix" style="background: #fff;"></div>')
-                .css({
-                    width: this.offsetWidth + "px",
-                    height: this.offsetHeight + "px",
-                    position: "absolute",
-                    opacity: "0.001",
-                    zIndex: 1000
-                })
-                .css($(this).offset())
-                .appendTo("body");
-        });
-    });
-    this.uiDialog.bind('mouseup', function (event, ui) {
-        $("div.ui-resizable-iframeFix").each(function () {
-            this.parentNode.removeChild(this);
-        }); //Remove frame helpers
-    });
-};

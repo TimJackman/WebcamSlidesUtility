@@ -73,19 +73,6 @@
 </div>
 <script>
     getWebcamPermissions();
-    function enumerate() {
-            navigator.mediaDevices.enumerateDevices()
-                .then(function (devices) {
-                    devices.forEach(function (device) {
-                        if (device.kind === "videoinput") {
-                            console.log(device.label);
-                            console.log(device.deviceId);
-                        }
-                    })
-                })
-        };
 </script>
-
-<button onclick="enumerate()">Test button</button>
 </body>
 </html>
