@@ -22,11 +22,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d55531f-6ffe-426e-b088-41960df4a715" name="Default Changelist" comment="Added await for webcam permission">
+    <list default="true" id="5d55531f-6ffe-426e-b088-41960df4a715" name="Default Changelist" comment="Updated Help Instructions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +97,7 @@
       <workItem from="1598990382872" duration="5078000" />
       <workItem from="1599066240703" duration="18470000" />
       <workItem from="1599094998924" duration="72000" />
-      <workItem from="1599239843269" duration="401000" />
+      <workItem from="1599239843269" duration="1195000" />
     </task>
     <task id="LOCAL-00001" summary="Added Feedback form">
       <created>1598990548719</created>
@@ -115,7 +113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598996054253</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added Help Instructions">
+      <created>1599240261805</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1599240261805</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,7 +143,9 @@
     <MESSAGE value="Added Feedback form" />
     <MESSAGE value="Added wait for webcam permission" />
     <MESSAGE value="Added await for webcam permission" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added await for webcam permission" />
+    <MESSAGE value="Added Help Instructions" />
+    <MESSAGE value="Updated Help Instructions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Help Instructions" />
   </component>
   <component name="WindowStateProjectService">
     <state x="715" y="344" key="#Notifications" timestamp="1598977618289">
@@ -217,14 +224,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599069764192" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1598990579642">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1599240266378">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1598990579642" />
-    <state x="978" y="596" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599072481967">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599240266378" />
+    <state x="978" y="596" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599241205100">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="978" y="596" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599072481967" />
+    <state x="978" y="596" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599241205100" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1599095061825">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
