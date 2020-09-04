@@ -363,7 +363,22 @@ body {
     margin-top: 15px;
     position: relative;
     top: -5px;
-    left: 2%;
+    left: 4%;
+    border: none;
+
+}
+
+#helpMenu {
+    font-size: medium;
+    height: 40px;
+    width: 150px;
+    border-radius: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 15px;
+    position: relative;
+    top: -5px;
+    left: 3%;
     border: none;
 
 }

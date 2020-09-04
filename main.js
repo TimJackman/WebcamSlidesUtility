@@ -193,6 +193,23 @@ $( function() {
         width: 300
     });
 
+    $( "#helpDialog" ).dialog({
+        autoOpen: false,
+        show: {
+            effect: "blind",
+            duration: 300
+        },
+        hide: {
+            effect: "blind",
+            duration: 300
+        }
+    });
+
+    $( "#helpMenu" ).on( "click", function() {
+        $( "#helpDialog" ).dialog( "open" );
+    });
+
+
     //$( "#slideshowContainer").resizable({
         //aspectRatio: 16 / 9
     //})
